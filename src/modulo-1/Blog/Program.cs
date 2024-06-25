@@ -1,4 +1,6 @@
 ﻿using System;
+using Blog.Data;
+using Blog.Models;
 
 namespace Blog
 {
@@ -6,7 +8,12 @@ namespace Blog
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using (var context = new BlogDataContext())
+            {
+                var tag = new Tag { Name = ".NET CORE", Slug = "dotnet-core" };
+                context.Tags.Add(tag);
+                context.SaveChanges();
+            }
         }
     }
 }
