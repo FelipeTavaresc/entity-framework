@@ -2,14 +2,14 @@ using Blog.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Blog.Data.Mappgins
+namespace Blog.data.Mappgins
 {
-    public class CategoryMap : IEntityTypeConfiguration<Category>
+    public class UserMap : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Category> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             // Tabela
-            builder.ToTable("Category");
+            builder.ToTable("User");
 
             // Chave Primária
             builder.HasKey(x => x.Id);
@@ -26,14 +26,19 @@ namespace Blog.Data.Mappgins
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
 
+            builder.Property(x => x.Bio);
+            builder.Property(x => x.Email);
+            builder.Property(x => x.Image);
+            builder.Property(x => x.PasswordHash);
+
             builder.Property(x => x.Slug)
                 .IsRequired()
                 .HasColumnName("Slug")
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(80);
 
-            // Índices
-            builder.HasIndex(x => x.Slug, "IX_Category_Slug")
+            // índice
+            builder.HasIndex(x => x.Slug, "IX_User_Slug")
                 .IsUnique();
         }
     }
