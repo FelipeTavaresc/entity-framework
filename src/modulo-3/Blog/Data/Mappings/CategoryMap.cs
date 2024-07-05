@@ -30,6 +30,10 @@ namespace Blog.Data.Mappgins
                 .IsRequired()
                 .HasColumnName("Slug")
                 .HasMaxLength(80);
+
+            // Índices
+            builder.HasIndex(x => x.Slug, "IX_Category_Slug")
+                .IsUnique();
         }
     }
 }
