@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Migrations
 {
     [DbContext(typeof(BlogDataContext))]
-    [Migration("20240718211811_InitialCreation")]
-    partial class InitialCreation
+    [Migration("20240718214531_RemovendoCampoGitHub")]
+    partial class RemovendoCampoGitHub
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,7 +70,7 @@ namespace Blog.Migrations
                     b.Property<DateTime>("LastUpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("SMALLDATETIME")
-                        .HasDefaultValue(new DateTime(2024, 7, 18, 21, 18, 11, 547, DateTimeKind.Utc).AddTicks(7925))
+                        .HasDefaultValue(new DateTime(2024, 7, 18, 21, 45, 31, 665, DateTimeKind.Utc).AddTicks(1015))
                         .HasColumnName("LastUpdateDate");
 
                     b.Property<string>("Slug")
