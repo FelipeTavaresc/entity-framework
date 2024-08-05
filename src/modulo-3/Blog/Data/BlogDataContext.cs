@@ -13,6 +13,8 @@ namespace Blog.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public DbSet<PostWithTagsCount> PostWithTagsCounts { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlServer("Server=localhost,1433;Database=BlogEF;User ID=sa;Password=1q2w3e4r@#$");
 
@@ -21,6 +23,18 @@ namespace Blog.Data
             modelBuilder.ApplyConfiguration(new CategoryMap());
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new PostMap());
+
+            modelBuilder.Entity<PostWithTagsCount>(x =>
+            {
+                x.HasNoKey();
+                x.ToSqlQuery(@"
+                    SELECT
+                        [Title] AS [Name],
+                        SELECT COUNT([Id]) FROM [Tags] WHERE [PostId] = [Id] AS [Count]
+                    FROM
+                        [Posts]
+                ");
+            });
         }
     }
 }

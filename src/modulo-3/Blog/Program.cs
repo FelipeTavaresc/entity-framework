@@ -23,22 +23,29 @@ namespace Blog
 
             // context.SaveChanges();
 
-            var user = context.Users.FirstOrDefault();
-            var post = new Post{
-                Author = user,
-                Body = "Meu artigo",
-                Category = new Category{
-                    Name = "Backend",
-                    Slug = "backend"
-                },
-                CreateDate = DateTime.Now,
-                Slug = "meu-artigo",
-                Summary = "Resumo artigo",
-                Title = "Meu Artigo"
-            };
+            // var user = context.Users.FirstOrDefault();
+            // var post = new Post{
+            //     Author = user,
+            //     Body = "Meu artigo",
+            //     Category = new Category{
+            //         Name = "Backend",
+            //         Slug = "backend"
+            //     },
+            //     CreateDate = DateTime.Now,
+            //     Slug = "meu-artigo",
+            //     Summary = "Resumo artigo",
+            //     Title = "Meu Artigo"
+            // };
 
-            context.Posts.Add(post);
-            context.SaveChanges();
+            // context.Posts.Add(post);
+            // context.SaveChanges();
+
+            var posts = context.PostWithTagsCounts.ToList();
+
+            foreach (var item in posts)
+            {
+                Console.WriteLine(item.Name);
+            }
         }
     }
 }
